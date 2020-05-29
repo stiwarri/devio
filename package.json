@@ -1,0 +1,34 @@
+{
+    "name": "devio",
+    "version": "1.0.0",
+    "description": "A social media web application for developers.",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app",
+        "start-dev": "nodemon app"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/STiwari1097/devio.git"
+    },
+    "author": "Shubham Tiwari",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/STiwari1097/devio/issues"
+    },
+    "homepage": "https://github.com/STiwari1097/devio#readme",
+    "devDependencies": {
+        "concurrently": "^5.2.0",
+        "nodemon": "^2.0.4"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "config": "^3.3.1",
+        "express": "^4.17.1",
+        "express-validator": "^6.5.0",
+        "gravatar": "^1.8.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.9.16",
+        "request": "^2.88.2"
+    }
+}
