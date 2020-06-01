@@ -7,13 +7,13 @@ const checkAuthMiddleware = (req, res, next) => {
     try {
         const authHeader = req.get('Authorization');
         if (!authHeader) {
-            throw createError(401, 'Not authenticated!');
+            throw createError(401, 'Not authenticated');
         }
 
         const token = authHeader.split(' ')[1];
         const decodedToken = jwt.verify(token, config.get('jwtSecretKey'));
         if (!decodedToken) {
-            throw createError(401, 'Error occured while decoding token. Not authenticated!');
+            throw createError(401, 'Error occured while decoding token. Not authenticated');
         }
 
         req.id = decodedToken.id;

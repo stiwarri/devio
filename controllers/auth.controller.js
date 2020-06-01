@@ -11,7 +11,7 @@ exports.signUp = async (req, res, next) => {
     try {
         const validationErrors = validationResult(req);
         if (!validationErrors.isEmpty()) {
-            throw createError(422, 'Validations failed!', validationErrors.array());
+            throw createError(422, 'Validations failed', validationErrors.array());
         }
 
         const { name, email, password } = req.body;
@@ -30,7 +30,7 @@ exports.signUp = async (req, res, next) => {
         user.password = hashedPassword;
         const savedUser = await user.save();
         if (!savedUser) {
-            throw createError(500, 'Couldn\'t create user!', err);
+            throw createError(500, 'Couldn\'t create user', err);
         }
         res.status(201).json({
             message: 'User created successfully.',
@@ -47,18 +47,18 @@ exports.signIn = async (req, res, next) => {
     try {
         const validationErrors = validationResult(req);
         if (!validationErrors.isEmpty()) {
-            throw createError(422, 'Validations failed!', validationErrors.array());
+            throw createError(422, 'Validations failed', validationErrors.array());
         }
 
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
-            throw createError(401, 'User with this e-mail ID doesn\'t exist!');
+            throw createError(401, 'User with this e-mail ID doesn\'t exist');
         }
 
         const isEqual = await bcrypt.compare(password, user.password);
         if (!isEqual) {
-            throw createError(401, 'Password is incorrect!');
+            throw createError(401, 'Password is incorrect');
         }
 
         const token = jwt.sign(

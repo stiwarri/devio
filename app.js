@@ -1,11 +1,11 @@
-const express = require('express');
 const bodyParser = require('body-parser');
+const express = require('express');
 
 const authRoutes = require('./routes/auth.routes');
-const profileRoutes = require('./routes/profile.routes');
 const postsRoutes = require('./routes/posts.routes');
-const connectDB = require('./config/db');
+const profileRoutes = require('./routes/profile.routes');
 const checkAuthMiddleware = require('./middlewares/check-auth');
+const connectDB = require('./config/db');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 
 const PORT = process.env.PORT || 5000;
@@ -16,7 +16,7 @@ app.use(bodyParser.json({ extended: false }));
 
 // Route middlewares
 app.use('/auth', authRoutes);
-app.use('/profile', checkAuthMiddleware, profileRoutes);
+app.use('/profile', profileRoutes);
 app.use('/posts', postsRoutes);
 
 // Global error-handler middleware
