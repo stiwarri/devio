@@ -3,8 +3,8 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     const message = err.message;
     const data = err.data;
     res.status(status).json({
-        message: message,
-        data: data
+        message,
+        data
     });
 };
 
