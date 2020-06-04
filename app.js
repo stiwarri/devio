@@ -4,7 +4,6 @@ const express = require('express');
 const authRoutes = require('./routes/auth.routes');
 const postsRoutes = require('./routes/posts.routes');
 const profileRoutes = require('./routes/profile.routes');
-const checkAuthMiddleware = require('./middlewares/check-auth');
 const connectDB = require('./config/db');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 

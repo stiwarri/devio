@@ -11,7 +11,6 @@ exports.getProfile = async (req, res, next) => {
         if (!userProfile) {
             throw createError(404, 'Profile not found');
         }
-
         res.status(200).json(profile);
     }
     catch (err) {
