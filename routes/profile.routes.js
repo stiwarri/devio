@@ -10,7 +10,8 @@ const checkAuthMiddleware = require('../middlewares/check-auth');
 // @access  private
 profileRoutes.get('/',
     checkAuthMiddleware,
-    profileController.getProfile);
+    profileController.getProfile
+);
 
 // @route   POST /profile
 // @desc    Create logged-in user's profile
@@ -25,26 +26,30 @@ profileRoutes.post('/',
             .trim()
             .not().isEmpty().withMessage('Skills are required')
     ],
-    profileController.createProfile);
+    profileController.createProfile
+);
 
 // @route   DELETE /profile
 // @desc    Delete profile, user & all posts of logged-in user   
 // @access  private
 profileRoutes.delete('/',
     checkAuthMiddleware,
-    profileController.deleteProfile);
+    profileController.deleteProfile
+);
 
 // @route   GET /profile/all
 // @desc    Get profiles of all users    
 // @access  public
 profileRoutes.get('/all',
-    profileController.getAllProfiles);
+    profileController.getAllProfiles
+);
 
 // @route   GET /profile/:id
 // @desc    Get profile of a single user by id    
 // @access  public
 profileRoutes.get('/:id',
-    profileController.getUserProfile);
+    profileController.getUserProfile
+);
 
 // @route   POST /profile/experience
 // @desc    Add experience to user profile    
@@ -65,14 +70,16 @@ profileRoutes.post('/experience',
             .trim()
             .not().isEmpty().withMessage('From is required')
     ],
-    profileController.addWorkExperience);
+    profileController.addWorkExperience
+);
 
 // @route   DELETE /profile/experience/:id
 // @desc    Delete experience from user profile by work-experience ID 
 // @access  private
 profileRoutes.delete('/experience/:id',
     checkAuthMiddleware,
-    profileController.deleteWorkExperience);
+    profileController.deleteWorkExperience
+);
 
 // @route   POST /profile/education
 // @desc    Add education to user's profile
@@ -91,15 +98,24 @@ profileRoutes.post('/education',
             .not().isEmpty().withMessage('Field Of Study is required'),
         body('from')
             .trim()
-            .not().isEmpty().withMessage('From is required'),
+            .not().isEmpty().withMessage('From is required')
     ],
-    profileController.addEducation);
+    profileController.addEducation
+);
 
 // @route   DELETE /profile/education/:id
 // @desc    Delete education from user profile by education ID 
 // @access  private
 profileRoutes.delete('/education/:id',
     checkAuthMiddleware,
-    profileController.deleteEducation);
+    profileController.deleteEducation
+);
+
+// @route   GET /profile/github/:username
+// @desc    Get github repos by github username
+// @access  public
+profileRoutes.get('/github/:username',
+    profileController.getGithubRepos
+);
 
 module.exports = profileRoutes;

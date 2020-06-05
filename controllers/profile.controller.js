@@ -1,5 +1,7 @@
-const { validationResult } = require('express-validator');
+const axios = require('axios');
+const config = require('config');
 const normalize = require('normalize-url');
+const { validationResult } = require('express-validator');
 
 const Profile = require('../models/Profile');
 const User = require('../models/User');
@@ -239,6 +241,25 @@ exports.deleteEducation = async (req, res, next) => {
         res.status(200).json({
             message: 'Education details deleted successfully'
         });
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
+};
+
+exports.getGithubRepos = async (req, res, next) => {
+    try {
+        const githubUserName = req.params.username;
+        const githubRepos = await axios.get(`https://api.github.com/users/${githubUserName}/repos?
+            per_page=5&
+            sort=created:asc&
+            client_id=${config.get('githubClientId')}&
+            client_secret=${config.get('githubClientSecret')}`, {
+            headers: {
+                'user-agent': 'node.js'
+            }
+        });
+        res.status(200).json(githubRepos.data);
     } catch (err) {
         console.log(err);
         next(err);
