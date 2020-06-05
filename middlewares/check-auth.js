@@ -15,8 +15,7 @@ const checkAuthMiddleware = (req, res, next) => {
         if (!decodedToken) {
             throw createError(401, 'Error occured while decoding token. Not authenticated');
         }
-
-        req.id = decodedToken.id;
+        req.user = decodedToken;
         next();
     }
     catch (err) {
