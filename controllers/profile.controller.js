@@ -115,7 +115,12 @@ exports.getUserProfile = async (req, res, next) => {
     }
     catch (err) {
         console.log(err.message);
-        next(err);
+        if (err.kind === 'ObjectId') {
+            next(createError(404, 'Profile not found'));
+        }
+        else {
+            next(err);
+        }
     }
 };
 
@@ -192,7 +197,12 @@ exports.deleteWorkExperience = async (req, res, next) => {
         });
     } catch (err) {
         console.log(err);
-        next(err);
+        if (err.kind === 'ObjectId') {
+            next(createError(404, 'Experience not found'));
+        }
+        else {
+            next(err);
+        }
     }
 };
 
@@ -243,7 +253,12 @@ exports.deleteEducation = async (req, res, next) => {
         });
     } catch (err) {
         console.log(err);
-        next(err);
+        if (err.kind === 'ObjectId') {
+            next(createError(404, 'Education not found'));
+        }
+        else {
+            next(err);
+        }
     }
 };
 

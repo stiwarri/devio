@@ -19,4 +19,35 @@ postRoutes.post('/',
     postController.createPost
 );
 
+// @route   GET /post/all
+// @desc    Get all the posts
+// @access  public
+postRoutes.get('/all',
+    postController.getAllPosts
+);
+
+// @route   DELETE /post/:id
+// @desc    Delete the post by id
+// @access  private
+postRoutes.delete('/:id',
+    checkAuthMiddleware,
+    postController.deletePost
+);
+
+// @route   PATCH /post/like/:id
+// @desc    Like the post by post id
+// @access  private
+postRoutes.patch('/like/:id',
+    checkAuthMiddleware,
+    postController.likePost
+);
+
+// @route   PATCH /post/dislike/:id
+// @desc    Dislike the post by post id
+// @access  private
+postRoutes.patch('/dislike/:id',
+    checkAuthMiddleware,
+    postController.dislikePost
+);
+
 module.exports = postRoutes;
