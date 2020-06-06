@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 
 const authRoutes = require('./routes/auth.routes');
-const postsRoutes = require('./routes/posts.routes');
+const postsRoutes = require('./routes/post.routes');
 const profileRoutes = require('./routes/profile.routes');
 const connectDB = require('./config/db');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
@@ -16,7 +16,7 @@ app.use(bodyParser.json({ extended: false }));
 // Route middlewares
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
-app.use('/posts', postsRoutes);
+app.use('/post', postsRoutes);
 
 // Global error-handler middleware
 app.use(errorHandlerMiddleware);
