@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+const commentSchema = mongoose.Schema({
+    parentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+        default: null
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     name: {
         type: String
@@ -19,14 +25,6 @@ const postSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    likes: [
-        {
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        }
-    ],
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -36,6 +34,6 @@ const postSchema = new mongoose.Schema({
     ]
 });
 
-postSchema.plugin(require('mongoose-autopopulate'));
+commentSchema.plugin(require('mongoose-autopopulate'));
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Comment', commentSchema);

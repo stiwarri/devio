@@ -107,7 +107,7 @@ exports.getAllProfiles = async (req, res, next) => {
 
 exports.getUserProfile = async (req, res, next) => {
     try {
-        const profile = await Profile.findOne({ user: req.params.id }).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.params.userId }).populate('user', ['name', 'avatar']);
         if (!profile) {
             throw createError(404, 'Profile not found');
         }
@@ -182,7 +182,7 @@ exports.addWorkExperience = async (req, res, next) => {
 
 exports.deleteWorkExperience = async (req, res, next) => {
     try {
-        const workExpId = req.params.id;
+        const workExpId = req.params.workExpId;
         const profile = await Profile.findOne({ user: req.user.id });
         if (!profile) {
             throw createError(404, 'Profile not found');
@@ -244,7 +244,7 @@ exports.addEducation = async (req, res, next) => {
 
 exports.deleteEducation = async (req, res, next) => {
     try {
-        const eduId = req.params.id;
+        const eduId = req.params.eduId;
         const profile = await Profile.findOne({ user: req.user.id });
         profile.education = profile.education.filter(edu => edu._id.toString() !== eduId);
         await profile.save();

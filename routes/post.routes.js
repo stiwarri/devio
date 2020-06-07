@@ -26,28 +26,54 @@ postRoutes.get('/all',
     postController.getAllPosts
 );
 
-// @route   DELETE /post/:id
+// @route   DELETE /post/:postId
 // @desc    Delete the post by id
 // @access  private
-postRoutes.delete('/:id',
+postRoutes.delete('/:postId',
     checkAuthMiddleware,
     postController.deletePost
 );
 
-// @route   PATCH /post/like/:id
+// @route   PATCH /post/like/:postId
 // @desc    Like the post by post id
 // @access  private
-postRoutes.patch('/like/:id',
+postRoutes.patch('/like/:postId',
     checkAuthMiddleware,
     postController.likePost
 );
 
-// @route   PATCH /post/dislike/:id
+// @route   PATCH /post/dislike/:postId
 // @desc    Dislike the post by post id
 // @access  private
-postRoutes.patch('/dislike/:id',
+postRoutes.patch('/dislike/:postId',
     checkAuthMiddleware,
     postController.dislikePost
+);
+
+// @route   POST /post/comment/add/:postId
+// @desc    Comment on a post by post id
+// @access  private
+postRoutes.post('/comment/add/:postId',
+    [
+        checkAuthMiddleware,
+        body('text')
+            .trim()
+            .not().isEmpty().withMessage('Comments text is empty')
+    ],
+    postController.addComment
+);
+
+// @route   POST /post/comment/delete/:postId
+// @desc    Delete a comment on a post by post ID
+// @access  private
+postRoutes.post('/comment/delete/:postId',
+    [
+        checkAuthMiddleware,
+        body('commentId')
+            .trim()
+            .not().isEmpty()
+    ],
+    postController.deleteComment
 );
 
 module.exports = postRoutes;

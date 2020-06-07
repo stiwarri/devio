@@ -44,10 +44,10 @@ profileRoutes.get('/all',
     profileController.getAllProfiles
 );
 
-// @route   GET /profile/:id
+// @route   GET /profile/:userId
 // @desc    Get profile of a single user by id    
 // @access  public
-profileRoutes.get('/:id',
+profileRoutes.get('/:userId',
     profileController.getUserProfile
 );
 
@@ -73,10 +73,10 @@ profileRoutes.post('/experience',
     profileController.addWorkExperience
 );
 
-// @route   DELETE /profile/experience/:id
+// @route   DELETE /profile/experience/:workExpId
 // @desc    Delete experience from user profile by work-experience ID 
 // @access  private
-profileRoutes.delete('/experience/:id',
+profileRoutes.delete('/experience/:workExpId',
     checkAuthMiddleware,
     profileController.deleteWorkExperience
 );
@@ -103,10 +103,10 @@ profileRoutes.post('/education',
     profileController.addEducation
 );
 
-// @route   DELETE /profile/education/:id
+// @route   DELETE /profile/education/:eduId
 // @desc    Delete education from user profile by education ID 
 // @access  private
-profileRoutes.delete('/education/:id',
+profileRoutes.delete('/education/:eduId',
     checkAuthMiddleware,
     profileController.deleteEducation
 );
