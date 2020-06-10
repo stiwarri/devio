@@ -1,0 +1,8 @@
+$website-width: 1280px;
+
+.container {
+    max-width: $website-width;
+    margin: auto;
+    padding: 0 2rem;
+    overflow: hidden;
+}
